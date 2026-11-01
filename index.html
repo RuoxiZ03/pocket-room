@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#dcecf8">
+    <meta name="description" content="A little personal world for plans, feelings and memories. Saved in your browser." data-i18n-content="i18n.description">
+    <title data-i18n="i18n.initialTitle">Pocket Room · My little world</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-window" data-i18n="i18n.skipContent">Skip to content</a>
+    <div id="personal-desktop" hidden></div>
+    <div id="migration-warning" class="notice" role="alert" hidden></div>
+    <div class="site-frame">
+      <main id="main-window" class="window main-window" aria-labelledby="view-title" tabindex="-1">
+        <div class="titlebar main-titlebar"><h2 id="view-title" tabindex="-1"><span data-i18n="i18n.openingWorld">Opening your world…</span></h2></div>
+        <div id="view" class="view"><p data-i18n="i18n.openingStorage">Opening local storage…</p></div>
+      </main>
+    </div>
+    <span id="storage-status" hidden></span>
+    <dialog id="editor" aria-labelledby="editor-title"></dialog>
+    <dialog id="confirm-dialog" aria-label="Confirm action" data-i18n-aria="i18n.confirmAction"></dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <noscript><p lang="zh-CN">这个小天地需要 JavaScript 和浏览器存储，请开启 JavaScript 后使用。</p><p lang="en">This little world needs JavaScript and browser storage. Enable JavaScript to use it.</p></noscript>
+  </body>
+</html>
