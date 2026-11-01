@@ -6,7 +6,7 @@ Pocket Room turns planning, journaling and little memories into a playful pixel 
 
 Created by **Ruoxi Zhang**, with AI-assisted development.
 
-[Source repository](https://github.com/RuoxiZ03/pocket-room) · Deployment verification in progress.
+[Live website](https://ruoxiz03.github.io/pocket-room/) · [Source repository](https://github.com/RuoxiZ03/pocket-room)
 
 ## Screenshots
 
@@ -92,7 +92,7 @@ Physical iOS/Android, Safari/Firefox, screen readers, real quota exhaustion, lon
 
 Publish this native static project from **Settings → Pages → Deploy from a branch → main → /(root)**. Keep index.html at the root and retain .nojekyll. No build command or secrets are needed. Hash routes support module navigation beneath a project-site subdirectory.
 
-This is a public repository under RuoxiZ03. The live address will be added after deployment is verified.
+The public site is https://ruoxiz03.github.io/pocket-room/. Initial Pages deployment, all module shortcuts and 66 published resource files were verified after publication.
 
 ## Artwork and credits
 
