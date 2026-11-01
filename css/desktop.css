@@ -1,0 +1,173 @@
+/* Shared desktop and the single application-window shell for every route. */
+body.desktop-mode {
+  padding: 0;
+  background: radial-gradient(ellipse at 92% 3%,#fffdf0 0,transparent 54%),radial-gradient(ellipse at 16% 70%,#c9e7ed 0,transparent 65%),#deeff1;
+  background-attachment: fixed;
+}
+#personal-desktop { position: fixed; inset: 0; overflow: auto; }
+.personal-desktop {
+  width: min(1050px, 100%);
+  min-height: 100svh;
+  margin: auto;
+  padding: 48px 48px calc(var(--desktop-status-space,80px) + 30px);
+  display: flex;
+  flex-direction: column;
+}
+.desktop-identity { position: relative; z-index: 1; }
+.desktop-identity h1 { position: relative; display: inline-block; margin: 0; color: #315d70; font: 48px/1.15 Georgia, serif; letter-spacing: -.6px; text-shadow: 1px 1px #eefbfa,2px 2px #91bbc62b; }
+.desktop-identity h1:focus { outline: none; }
+.desktop-identity p { margin: 9px 0 0; color: #587f8f; font: 16px/1.6 Tahoma,sans-serif; }
+.brand-line { display: flex; align-items: center; gap: 17px; width: fit-content; max-width: 100%; }
+.brand-rule { width: min(340px,100%); display: flex; align-items: center; gap: 7px; height: 20px; margin-top: 8px; }
+.brand-rule::before,.brand-rule::after { content: ''; height: 2px; flex: 1; background: #8eb6c5; box-shadow: 0 1px #f8ffff; }
+.brand-rule .pixel-ornament { width: 13px; height: 13px; }
+.desktop-icons { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px 48px; margin: 48px 0 15px; width: 100%; max-width: 900px; align-self: center; }
+.desktop-shortcut { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0; min-height: 148px; padding: 8px 5px; color: #365f72; text-decoration: none; font-size: 14px; text-align: center; border-radius: 9px; }
+.desktop-icon-art { position: relative; display: grid; place-items: center; width: 104px; height: 104px; }
+.desktop-icon-art::before { content: ''; position: absolute; left: 13px; right: 17px; bottom: 3px; height: 10px; transform: translate(-4px,3px); border-radius: 50%; background: radial-gradient(ellipse,#78a6b83d,transparent 72%); transition: transform 180ms,opacity 180ms; }
+.pixel-icon { position: relative; display: block; width: 64px; height: 64px; flex: 0 0 auto; image-rendering: pixelated; transition: transform .15s ease; }
+.desktop-icon-art>.pixel-icon { width: 96px; height: 96px; }
+.desktop-entry-label { line-height: 1.5; }
+.desktop-entry-state { min-height: 15px; font: 11px/15px Tahoma,sans-serif; font-variant-numeric: tabular-nums; color: #678697; }
+.desktop-state-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.desktop-shortcut:hover { color: #805a78; }
+.desktop-shortcut:hover .pixel-icon, .desktop-shortcut:focus-visible .pixel-icon { transform: translateY(-3px); }
+.desktop-shortcut:active .pixel-icon { transform: translateY(1px) scale(.97); }
+.desktop-shortcut:hover .desktop-icon-art::before,.desktop-shortcut:focus-visible .desktop-icon-art::before { transform: translate(-5px,5px) scale(1.08); opacity: .75; }
+.desktop-shortcut:focus-visible { outline: 2px solid #668b9d; outline-offset: 3px; background: #f8fcfb50; }
+.desktop-bottom { position: fixed; z-index: 3; left: 14px; right: 14px; bottom: max(10px,env(safe-area-inset-bottom)); display: grid; grid-template-columns: max-content minmax(0,1fr) max-content; align-items: center; gap: 14px; min-height: 52px; padding: 4px 16px; border: 1px solid #98bdcc; border-radius: 5px; background: linear-gradient(#f2fafbd9,#d0e8efeb); box-shadow: inset 0 0 0 1px #f8ffff,0 -2px 0 #e9f7f687; color: #4b7385; }
+.desktop-date-group { display: flex; align-items: center; gap: 7px; padding-right: 15px; border-right: 1px solid #a8c8d4; }
+.desktop-date { font-size: 12px; white-space: nowrap; }
+.desktop-bottom .pixel-icon { width: 24px; height: 24px; }
+.desktop-live { display: flex; justify-content: center; align-items: center; gap: 16px; min-width: 0; }
+.desktop-live a,.desktop-setting { min-height: 40px; display: flex; align-items: center; gap: 7px; min-width: 0; color: #456f84; font: 12px/1.4 Tahoma,sans-serif; text-decoration: none; border-radius: 3px; }
+.desktop-live a>span { max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.desktop-live .focus-indicator { flex-shrink: 0; }
+.desktop-utilities { display: flex; align-items: center; gap: 17px; padding-left: 14px; border-left: 1px solid #a8c8d4; }
+.desktop-setting span { white-space: nowrap; }
+.desktop-setting .desktop-utility-short { display: none; }
+.desktop-bottom a:focus-visible { outline: 2px solid #648c9f; outline-offset: 2px; background: #fff9f37a; }
+.desktop-bottom a:hover { color: #916b88; }
+.desktop-home .site-frame { display: none; }
+.desktop-mode:not(.desktop-home) .site-frame {
+  position: fixed;
+  z-index: 4;
+  left: 50%; top: 7dvh;
+  transform: translateX(-50%);
+  width: min(var(--app-width, 1000px), calc(100% - 64px));
+  height: var(--app-height, auto);
+  max-height: calc(93dvh - var(--desktop-status-space,80px));
+  margin: 0;
+  padding: 0;
+  border: 1px solid #839fab;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #eff7f8;
+  box-shadow: 0 24px 70px #47667330, 0 4px 0 #7e9ba61a, inset 0 1px #fff;
+
+}
+.desktop-mode .main-window { display: flex; flex-direction: column; height: 100%; max-height: min(86dvh,calc(93dvh - var(--desktop-status-space,80px))); min-height: 0; padding: 5px; border: 0; border-radius: 8px; box-shadow: none; background: #f4fafb; }
+.desktop-mode .main-titlebar { flex: 0 0 auto; position: relative; top: auto; min-height: 42px; padding: 6px 9px; border: 1px solid #a1b7bf; border-radius: 4px 4px 2px 2px; background: linear-gradient(#fcffff,#d4e5eb 55%,#e8f1f2); }
+.desktop-mode #view-title { display: flex; align-items: center; gap: 9px; font: bold 12px Tahoma,sans-serif; }
+.desktop-mode #view-title .pixel-icon { width: 26px; height: 26px; }
+.desktop-mode .view { max-height: min(calc(86dvh - 54px),calc(93dvh - var(--desktop-status-space,80px) - 54px)); min-height: 0; flex: 1; overflow: auto; overscroll-behavior: contain; padding: 24px; scrollbar-color: #b0c7d0 #e5f0f3; }
+.desktop-mode button.day { min-height: 82px; }
+.desktop-mode .month-title { font-size: 27px; }
+.desktop-mode[data-app="room"] .view { padding: 12px 16px; }
+.window-ghost { position: fixed; z-index: 5; overflow: hidden; pointer-events: none; border: 1px solid #839fab; border-radius: 9px; background: #eff7f8; box-shadow: 0 24px 70px #47667330; }
+.app-close { display: grid; place-items: center; min-width: 30px; min-height: 29px; border: 1px solid #8b9da9; border-radius: 4px; background: var(--candy-fill); color: #69556d; text-decoration: none; font: 21px/1 Tahoma,sans-serif; box-shadow: inset 0 1px #fff, 0 1px #8299a31c; }
+.app-close:active { transform: translateY(1px); }
+.desktop-mode #migration-warning { position: fixed; z-index: 10; top: 10px; left: 5%; width: 90%; }
+body[data-app="room"], body[data-app="calendar"] { --app-height: 86dvh; }
+body[data-app="diary"] { --app-width: 890px; }
+body[data-app="moods"] { --app-width: 1000px; }
+body[data-app="memories"], body[data-app="shelf"] { --app-width: 940px; }
+body[data-app="player"] { --app-width: 660px; }
+body[data-app="about"] { --app-width: 750px; }
+body[data-app="backup"] { --app-width: 780px; }
+.title-jewels { display: flex; align-items: center; gap: 13px; pointer-events: none; }
+.pixel-ornament { width: 20px; height: 20px; image-rendering: pixelated; }
+.title-jewels .pixel-ornament:first-child { width: 26px; height: 26px; margin-top: -15px; }
+.title-jewels .pixel-ornament:last-child { width: 37px; height: 37px; margin-top: 6px; }
+.desktop-atmosphere { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.desktop-window-light { position: absolute; inset: 0; background: linear-gradient(151deg,transparent 21%,#fffef33d 26%,#fffdf373 34%,transparent 40%,transparent 58%,#fffdf54a 64%,transparent 70%); }
+.desktop-window-shadow { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .13; }
+.desktop-sill { position: absolute; inset: 70% -10% -8%; background: linear-gradient(166deg,transparent 32%,#fffdf273 34%,#fffdf25e 38%,#9ec2cd24 39%,transparent 41%,transparent 72%,#fbfff74d 74%,transparent 78%); }
+.desktop-blossoms { position: absolute; pointer-events: none; }
+.desktop-blossoms svg { width: 100%; height: 100%; }
+.blossom-top { top: -25px; right: -5px; width: 170px; height: 280px; opacity: .65; }
+.blossom-bottom { right: -45px; bottom: 6%; width: 215px; height: 355px; opacity: .14; transform: rotate(180deg); }
+.desktop-sparks { position: absolute; inset: 0; pointer-events: none; }
+.desktop-sparks .pixel-ornament { position: absolute; width: 15px; height: 15px; opacity: .5; }
+.desktop-sparks .pixel-ornament:nth-child(1) { left: 6%; top: 35%; }
+.desktop-sparks .pixel-ornament:nth-child(2) { right: 14%; top: 23%; }
+.desktop-sparks .pixel-ornament:nth-child(3) { left: 8%; bottom: 18%; }
+.desktop-sparks .pixel-ornament:nth-child(4) { right: 24%; bottom: 15%; }
+.desktop-record { transform-box: fill-box; transform-origin: center; animation: desktop-record-turn 8s linear infinite; animation-play-state: paused; }
+[data-entry="player"][data-playing="true"] .desktop-record { animation-play-state: running; }
+html[data-page-hidden="true"] .desktop-record { animation-play-state: paused !important; }
+@keyframes desktop-record-turn { to { transform: rotate(360deg); } }
+.desktop-shortcut:hover .desktop-icon-art, .desktop-shortcut:focus-visible .desktop-icon-art, .desktop-shortcut.is-open .desktop-icon-art { background: radial-gradient(ellipse, #fffdf3aa, #f9d9ea33 45%, transparent 70%); }
+.desktop-setting:hover .pixel-icon, .desktop-setting:focus-visible .pixel-icon { transform: translateY(-2px); }
+.pixel-burst { position: fixed; width: 13px; height: 13px; pointer-events: none; animation: pixel-scatter .43s ease-out forwards; animation-delay: var(--burst-delay); }
+@keyframes pixel-scatter { from { opacity: 1; translate: -50% -50%; } to { opacity: 0; translate: calc(-50% + var(--dx)) calc(-50% + var(--dy)); } }
+@media (min-width:721px) and (max-height:760px) {
+  .personal-desktop { padding-top: 32px; }
+  .desktop-icons { margin-top: 28px; row-gap: 10px; }
+  .desktop-shortcut { gap: 3px; padding-block: 3px; min-height: 144px; }
+  .desktop-icon-art { width: 96px; height: 96px; }
+}
+@media (max-width:720px) {
+  .personal-desktop { padding: 35px 22px calc(var(--desktop-status-space,130px) + 28px); }
+  .desktop-identity h1 { font-size: 34px; }
+  .desktop-identity p { font-size: 13px; }
+  .brand-line { gap: 12px; }
+  .brand-rule { width: 270px; }
+  .desktop-icons { gap: 22px 6px; margin: 38px 0 14px; }
+  .desktop-shortcut { font-size: 12px; gap: 4px; min-height: 116px; padding-inline: 1px; }
+  .desktop-icon-art { width: 72px; height: 72px; }
+  .desktop-icon-art>.pixel-icon { width: 64px; height: 64px; }
+  .desktop-entry-state { font-size: 10px; }
+  .title-jewels { gap: 8px; }
+  .title-jewels .pixel-ornament:first-child { width: 17px; height: 17px; margin-top: -9px; }
+  .title-jewels .pixel-ornament:last-child { width: 26px; height: 26px; }
+  .blossom-top { width: 100px; height: 170px; right: -25px; opacity: .4; }
+  .blossom-bottom { width: 130px; height: 210px; right: -50px; }
+  .desktop-bottom { left: 7px; right: 7px; grid-template-columns: minmax(0,1fr) max-content; gap: 0 8px; padding: 3px 9px; }
+  .desktop-date-group { padding-right: 0; border-right: 0; gap: 4px; }
+  .desktop-date { font-size: 11px; }
+  .desktop-utilities { padding-left: 7px; gap: 7px; }
+  .desktop-setting { gap: 3px; font-size: 11px; min-height: 44px; }
+  .desktop-setting .desktop-utility-full { display: none; }
+  .desktop-setting .desktop-utility-short { display: inline; }
+  .desktop-bottom .pixel-icon { width: 19px; height: 19px; }
+  .desktop-live { grid-column: 1/-1; grid-row: 2; border-top: 1px solid #b8d2dc; justify-content: flex-start; gap: 12px; }
+  .desktop-live a { font-size: 11px; min-height: 44px; }
+  .desktop-music { flex: 1; }
+  .desktop-live a>span { max-width: 170px; }
+  .desktop-mode:not(.desktop-home) .site-frame { left: 6px; top: 6px; transform: none; width: calc(100% - 12px); height: calc(100dvh - var(--desktop-status-space,130px) - 12px); max-height: none; border-radius: 7px; }
+  .desktop-mode .main-window { height: 100%; max-height: calc(100dvh - var(--desktop-status-space,130px) - 14px); padding: 3px; }
+  .desktop-mode .main-titlebar { padding: 5px 7px; min-height: 43px; }
+  .desktop-mode .view { max-height: none; padding: 14px 10px; }
+  .app-close { min-width: 44px; min-height: 44px; }
+}
+@media (max-width:360px) {
+  .personal-desktop { padding-inline: 16px; }
+  .desktop-identity h1 { font-size: 31px; }
+  .brand-line { gap: 8px; }
+  .desktop-icons { gap: 20px 2px; }
+  .desktop-bottom { grid-template-columns: 1fr; }
+  .desktop-utilities { grid-row: 2; justify-content: flex-end; border: 0; }
+  .desktop-live { grid-row: 3; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .pixel-icon { transition: none; }
+  .pixel-burst { display: none; }
+  .desktop-sparks .pixel-ornament { animation: none; opacity: .16; }
+  .desktop-shortcut:hover .pixel-icon, .desktop-shortcut:focus-visible .pixel-icon, .desktop-shortcut:active .pixel-icon { transform: none; }
+  .desktop-mode:not(.desktop-home) .site-frame { animation: none; }
+  .desktop-record { animation: none; transform: none; }
+  .desktop-icon-art::before { transform: none !important; transition: none; }
+}
+html.reduce-motion .desktop-record { animation: none !important; transform: none !important; }
+html.reduce-motion .desktop-icon-art::before { transform: none !important; transition: none; }

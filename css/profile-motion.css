@@ -1,0 +1,27 @@
+/* Author credits never read or write the user's profile. */
+.project-file { max-width: 570px; padding: 25px 22px; margin: auto; color: #49697a; }
+.project-file>.pixel-icon { width: 58px; height: 58px; margin: 0 0 20px; }
+.project-file h3 { margin: 7px 0 12px; font: 32px Georgia,serif; }
+.project-tagline { font: italic 17px/1.7 Georgia,serif; color: #7d6280; }
+.project-credit { margin: 25px 0 16px; font-weight: bold; }
+.project-storage { margin: 26px 0 0; padding-top: 20px; border-top: 1px dashed #b3c6d0; font-size: 12px; }
+body[data-app="project"] { --app-width: 670px; }
+/* One entry sequence per document; navigating back does not rebuild the desktop. */
+.desktop-shortcut { animation: shortcut-arrive 260ms ease-out both; animation-delay: calc(var(--entry-index) * 27ms); }
+.desktop-shortcut:active .pixel-icon { transform: translateY(1px) scale(.97); }
+.desktop-shortcut .pixel-icon { transition: transform 180ms cubic-bezier(.2,.8,.3,1.35); }
+.personal-desktop.desktop-arrived .desktop-shortcut { animation: none; }
+@keyframes shortcut-arrive { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+/* Feature accents affect covers, photos and small ornaments, never body text. */
+html[data-page-hidden="true"] .desktop-sparks .pixel-ornament, html[data-page-hidden="true"] .flower, html[data-page-hidden="true"] .stereo-disc { animation-play-state: paused !important; }
+@media (max-width:720px) {
+  .project-file { padding: 17px 10px; }
+}
+/* The explicit preference has the same effect as the OS preference. */
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html.reduce-motion .pixel-burst { display: none !important; }
+html.reduce-motion .pixel-icon, html.reduce-motion .entry-photo, html.reduce-motion .shelf-cover, html.reduce-motion .cover-fallback { transform: none !important; }
+@media (prefers-reduced-motion:reduce) {
+  .desktop-shortcut, .garden-pot .flower { animation: none !important; }
+  .shelf-item .shelf-cover, .shelf-item .cover-fallback { transform: none !important; transition: none; }
+}

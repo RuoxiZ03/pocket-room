@@ -1,0 +1,16 @@
+/* Room content shares the desktop app frame; it has no second titlebar/header. */
+.interactive-room { width: min(100%, 780px, calc((86dvh - 145px) * 1.23077)); margin: 0 auto; }
+.toy-room-stage { position: relative; width: 100%; aspect-ratio: 640/520; background: #e2eff0; overflow: hidden; border: 1px solid #a1b4ba; border-radius: 3px; }
+.toy-room-canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+/* Renderer projects each independent model into this accessible HTML target. */
+.room-object { position: absolute; min-height: 0; min-width: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.room-object:hover, .room-object:active { background: #cffff50b; box-shadow: none; transform: none; }
+.room-object:focus-visible { outline: 0; background: #c9fff226; }
+.room-object-label { position: absolute; transform: translate(-50%,-100%); padding: 5px 10px; border: 1px solid #386967; border-radius: 3px; background: #f5f3dcee; color: #224f51; box-shadow: 2px 2px #244b4433; pointer-events: none; font: 12px/1.4 Tahoma,sans-serif; white-space: nowrap; z-index: 2; }
+.toy-status { display: flex; justify-content: space-between; gap: 12px; padding: 9px 2px; color: #607982; font: 11px/1.4 Tahoma,sans-serif; }
+.room-fallback { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding-top: 8px; }
+@media (max-width:720px) {
+  .interactive-room { width: 100%; }
+  .toy-status { flex-direction: column; gap: 3px; font-size: 10px; }
+  .room-object-label { font-size: 10px; padding: 4px 6px; }
+}

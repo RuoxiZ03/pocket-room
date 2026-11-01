@@ -1,0 +1,14 @@
+/* Shared app interiors. Each visual model belongs to its feature, not the shell. */
+.app-kicker { margin: 0 0 15px; color: #8d7186; font: 10px/1.4 Tahoma,sans-serif; letter-spacing: 2px; }
+.date-tab { display: inline-block; padding: 3px 12px; margin: 0 0 10px; background: #e9cfda; color: #754c64; border: 1px solid #c39dae; border-radius: 2px 7px 2px 2px; font-size: 11px; }
+/* Diary now owns its book and editor components in diary.css. */
+/* Memory Box owns its album/viewer in memories.css. */
+/* Pixel instruments now own their materials in focus-music.css. */
+/* About Me owns its dossier in profile.css. */
+/* Backup internals are unchanged: visually ordered, compact tool panels. */
+body[data-app="backup"] .backup-grid { grid-template-columns: 1fr; gap: 14px; counter-reset: tool; }
+body[data-app="backup"] .backup-grid>.card { padding: 18px 20px; border-radius: 5px; border-color: #b5c9d2; background: #f7fcfc; box-shadow: inset 4px 0 #c9dce6; }
+body[data-app="backup"] .backup-grid>.card h3 { color: #54778a; font: 19px Georgia,serif; }
+body[data-app="backup"] .backup-grid>.card h3::before { counter-increment: tool; content: '0' counter(tool) ' / '; font: 11px Tahoma,sans-serif; color: #9d7b93; }
+@media (max-width:720px) {
+}

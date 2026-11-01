@@ -1,0 +1,81 @@
+/* My Shelf adopts the approved Garden kit. Only shelf objects/layout live here. */
+.favorite-shelf { max-width:800px; margin:auto; color:#49665e; container-type:inline-size; }
+.shelf-heading { display:flex; justify-content:space-between; align-items:center; gap:14px; margin:0 2px 14px; }
+.shelf-heading .shelf-results { margin:0; font-size:13px; line-height:1.6; }
+.shelf-heading button { flex-shrink:0; }
+.shelf-filters { margin:0 2px 18px; }
+.shelf-filter-row { display:flex; gap:10px; align-items:start; margin-bottom:10px; }
+.shelf-filter-label { width:48px; flex-shrink:0; padding-top:7px; font-size:12px; line-height:1.5; font-weight:bold; }
+.shelf-chips { display:flex; flex-wrap:wrap; gap:8px; min-width:0; }
+.pixel-ui .filter-chip { padding:5px 9px; font-size:12px; min-height:32px; }
+.pixel-ui .filter-chip[aria-pressed="true"] { background:var(--px-pink); box-shadow:var(--px-outline),inset 2px 2px #fff4df,inset -2px -2px #c994a9; }
+.shelf-tools { border-top:2px solid #c0c9a8; padding-top:8px; font-size:12px; }
+.shelf-tools summary { padding:3px 0; width:fit-content; line-height:1.5; }
+.shelf-tools input { width:100%; max-width:300px; margin:10px 2px 4px; }
+.shelf-tools[open] input { display:block; }
+.favorite-rack {
+ position:relative; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px 0;
+ margin:4px; padding:18px 10px 14px;
+ border:0; background:#dce3ca;
+ box-shadow:0 -4px #49665e,4px 0 #49665e,0 4px #49665e,-4px 0 #49665e,inset 6px 0 #f3dfb9,inset -6px 0 #a18463,inset 0 6px #c7a47b,inset 0 -6px #ba946d,4px 8px 0 #78907650;
+}
+.favorite-rack::before { content:""; position:absolute; top:6px; left:6px; right:6px; height:2px; background:#fff0cc; pointer-events:none; }
+.favorite-rack[data-empty="true"] { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.favorite-plank { display:contents; }
+.pixel-ui :is(.favorite-object,.empty-shelf-slot) {
+ display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:144px auto auto;
+ gap:5px; align-content:start; justify-items:center;
+ padding:0 0 10px; min-width:0; border:0; border-radius:0; background:none; box-shadow:none;
+}
+.pixel-ui :is(.favorite-object,.empty-shelf-slot):hover:not(:disabled) { background:none; box-shadow:none; transform:none; }
+.pixel-ui :is(.favorite-object,.empty-shelf-slot):active:not(:disabled) { box-shadow:none; transform:none; }
+.favorite-display {
+ position:relative; display:flex; align-items:flex-end; justify-content:center;
+ width:100%; height:144px; padding-bottom:16px; isolation:isolate;
+}
+.favorite-display::after {
+ content:""; position:absolute; bottom:2px; left:0; width:calc(100% * var(--shelf-board-span,1)); height:12px;
+ background:#c09b74; border-top:2px solid #f5dfb4; border-bottom:2px solid #896e50;
+ box-shadow:0 3px #68816b,inset 0 -2px #a3825d; pointer-events:none;
+}
+.favorite-display::before { content:""; position:absolute; left:calc(50% - 42px); bottom:14px; width:84px; height:4px; background:#9fb39a; pointer-events:none; }
+.shelf-object-art { display:block; flex-shrink:0; width:96px; height:128px; image-rendering:pixelated; transition:transform 160ms ease-out; transform-origin:bottom center; }
+.favorite-photo-frame {
+ width:96px; height:128px; padding:4px 4px 9px; background:#fff3d7;
+ box-shadow:0 -2px #718a78,2px 0 #718a78,0 2px #718a78,-2px 0 #718a78,inset 2px 2px #fffced,inset -2px -2px #bcba99;
+ transition:transform 160ms ease-out; transform-origin:bottom center;
+}
+.favorite-cover { display:block; width:100%; height:100%; padding:0; border:0; border-radius:0; box-shadow:none; object-fit:cover; }
+.favorite-object:is(:hover,:focus-visible) .favorite-display>:is(.shelf-object-art,.favorite-photo-frame),
+.empty-shelf-slot:is(:hover,:focus-visible) .shelf-object-art { transform:translateY(-3px); }
+.favorite-object:active .favorite-display>:is(.shelf-object-art,.favorite-photo-frame),
+.empty-shelf-slot:active .shelf-object-art { transform:translateY(2px); }
+.favorite-title { padding:0 10px; width:100%; overflow-wrap:anywhere; font:13px/1.6 Tahoma,"Microsoft YaHei","PingFang SC",sans-serif; text-align:center; }
+.favorite-object small { padding:1px 6px; color:#49665e; background:#f1e7c9; font-size:11px; line-height:1.6; }
+.empty-shelf-slot>span:last-child { font-size:12px; line-height:1.6; padding:0 8px; }
+.empty-shelf-slot .shelf-object-art { opacity:.85; }
+.shelf-no-results { grid-column:1/-1; padding:14px 12px 24px; text-align:center; }
+.shelf-no-results h3 { margin:0 0 6px; font-size:14px; line-height:1.5; }
+.shelf-no-results p { margin:0 0 12px; font-size:12px; line-height:1.6; }
+.favorite-detail { display:grid; grid-template-columns:120px minmax(0,1fr); gap:18px; padding:10px 2px; align-items:start; }
+.favorite-detail>:is(.shelf-object-art,.favorite-photo-frame) { justify-self:center; }
+.favorite-detail .eyebrow { margin-top:0; font-size:12px; line-height:1.7; letter-spacing:0; }
+.favorite-detail .prose { white-space:pre-wrap; overflow-wrap:anywhere; font-size:14px; line-height:1.8; }
+.favorite-detail a { display:inline-block; overflow-wrap:anywhere; line-height:1.7; }
+body[data-app="shelf"] #toast { border:2px solid #49665e; border-radius:0; color:#49665e; background:#fff5df; box-shadow:3px 4px 0 #66877970; }
+@container(max-width:599px) {
+ .favorite-rack { grid-template-columns:repeat(2,minmax(0,1fr)); padding-inline:8px; }
+ .shelf-filter-row { display:block; }
+ .shelf-filter-label { display:block; padding-top:0; margin-bottom:8px; width:auto; }
+ .shelf-heading .shelf-results { font-size:12px; }
+ .favorite-title { padding-inline:8px; }
+ .favorite-display::after { width:calc(100% * var(--shelf-board-span-mobile,1)); }
+}
+@media(max-width:720px) {
+ .pixel-ui .filter-chip { min-height:44px; padding:6px 10px; }
+ .favorite-object small { font-size:12px; }
+ .favorite-detail { grid-template-columns:1fr; }
+ .favorite-detail>div:last-child { width:100%; }
+}
+html.reduce-motion :is(.shelf-object-art,.favorite-photo-frame) { transform:none!important; transition:none!important; }
+@media(prefers-reduced-motion:reduce) { :is(.shelf-object-art,.favorite-photo-frame) { transform:none!important; transition:none!important; } }
